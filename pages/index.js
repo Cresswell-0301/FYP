@@ -76,7 +76,7 @@ export default function Home(){
            font-semibold
            w-full
            bg-[#ffffff]
-           hover:bg-slate-300
+           hover:bg-slate-400
            hover:text-black 
            focus:ring-4 
            focus:outline-none 
@@ -98,7 +98,7 @@ export default function Home(){
         </div>
 
         <div class="px-6 sm:px-0">
-          <button type="button" class="py-2 px-4 flex w-full justify-between items-center bg-white hover:bg-slate-300 hover:text-blue-800 focus:ring-blue-400 focus:ring-offset-blue-200 text-blue-500 transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
+          <button type="button" class="py-2 px-4 flex w-full justify-between items-center bg-blue-500 hover:bg-blue-800 hover:text-white focus:ring-blue-400 focus:ring-offset-blue-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
             <svg fill="currentColor" className="mr-2 w-7 h-6" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
               <path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"></path>
             </svg>
