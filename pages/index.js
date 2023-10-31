@@ -66,11 +66,11 @@ export default function Home(){
           </div>
         </form>
 
-        <p className="mt-10 text-center text-sm text-gray-500 pb-4">
+        <p className="mt-10 text-center text-sm text-gray-500 pb-5">
           --------------------------<span className="text-gray-450"> or Login with </span>--------------------------
         </p>
 
-        <div class="px-6 sm:px-0 max-w-sm">
+        <div class="px-6 sm:px-0">
           <button type="button"
           className="text-gray-600
            font-semibold
@@ -92,19 +92,21 @@ export default function Home(){
            dark:focus:ring-[#4285F4]/55 
            mr-2 mb-2">
            <img class="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo"/>
-           Sign up with Google
+           Sign in with Google
            <span></span>
           </button>
         </div>
 
-        <button type="button" class="py-2 px-4 max-w-md flex justify-between items-center bg-white hover:bg-slate-300 hover:text-blue-800 focus:ring-blue-400 focus:ring-offset-blue-200 text-blue-500 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
-          <svg fill="currentColor" className="mr-2 w-7 h-6" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"></path>
-          </svg>
-          Sign in with Facebook
-          <span></span>
-        </button>
-
+        <div class="px-6 sm:px-0">
+          <button type="button" class="py-2 px-4 flex w-full justify-between items-center bg-white hover:bg-slate-300 hover:text-blue-800 focus:ring-blue-400 focus:ring-offset-blue-200 text-blue-500 transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
+            <svg fill="currentColor" className="mr-2 w-7 h-6" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"></path>
+            </svg>
+            Sign in with Facebook
+            <span></span>
+          </button>  
+        </div>
+        
       </div>
     </div>
   )
