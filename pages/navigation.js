@@ -10,7 +10,6 @@ export default function Navigation (){
 
     useEffect(() => {
         const handleResize = () => {
-        const mobileMenu = document.getElementById('menu-toggle-button');
         const menuToggle = document.getElementById('mobile-menu-2');
         if (window.innerWidth <= 768) {
             setIsButtonVisible(true);
