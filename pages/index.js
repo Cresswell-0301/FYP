@@ -71,7 +71,7 @@ export default function Home(){
             --------------------------<span className="text-gray-450"> or Login with </span>--------------------------
           </p>
 
-          <div class="px-6 sm:px-0">
+          <div className="px-6 sm:px-0">
             <button type="button"
             className="text-gray-600
             font-semibold
@@ -81,25 +81,25 @@ export default function Home(){
             hover:text-black 
             focus:ring-4 
             focus:outline-none 
-            focus:ring-[#4285F4]/50 
+            focus:ring-white
             rounded-lg 
             text-base 
+            duration-200
             px-5 
             py-2.5 
             text-center 
             inline-flex 
             items-center 
             justify-between 
-            dark:focus:ring-[#4285F4]/55 
             mr-2 mb-2">
-            <img class="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo"/>
+            <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo"/>
             Sign in with Google
             <span></span>
             </button>
           </div>
 
-          <div class="px-6 sm:px-0">
-            <button type="button" class="py-2 px-4 flex w-full justify-between items-center bg-blue-500 hover:bg-blue-800 hover:text-white focus:ring-blue-400 focus:ring-offset-blue-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
+          <div className="px-6 sm:px-0">
+            <button type="button" className="py-2 px-4 flex w-full justify-between items-center bg-blue-500 hover:bg-blue-800 hover:text-white focus:ring-blue-400 focus:ring-offset-blue-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
               <svg fill="currentColor" className="mr-2 w-7 h-6" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"></path>
               </svg>
@@ -107,32 +107,26 @@ export default function Home(){
               <span></span>
             </button>  
           </div>
+
+          <div className="px-6 sm:px-0 py-2">
+            <a href="/scroll-down">
+              <button type="button" className="py-2 px-4 flex w-full justify-center items-center bg-green-500 hover:bg-green-700 hover:text-white focus:ring-green-300 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
+                Scroll Down Page
+             </button>
+            </a>  
+          </div>
+
+          <div className="px-6 sm:px-0 py-2">
+            <a href="/navigation">
+              <button type="button" className="py-2 px-4 flex w-full justify-center items-center bg-green-500 hover:bg-green-700 hover:text-white focus:ring-green-300 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
+                Navigation Bar Page
+             </button>
+            </a>  
+          </div>
+          
         </div>
       </div>
-
-      {/* SLides Scroll Down */}
-      <div class="relative">
-        <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-green-200 to-blue-200">
-          <h2 class="text-4xl font-bold">The First slide</h2>
-          <p class="mt-2">Scroll Down for next slide</p>
-        </div>
-
-        <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-indigo-800 to-purple-800 text-white">
-          <h2 class="text-4xl font-bold">The Second slide</h2>
-          <p class="mt-2">Scroll Down for next slide</p>
-        </div>
-
-        <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-purple-800 to-pink-800 text-white">
-          <h2 class="text-4xl font-bold">The Third slide</h2>
-          <p class="mt-2">Scroll Down</p>
-        </div>
-
-        <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-200 to-indigo-100 text-black">
-          <h2 class="text-4xl font-bold">The Fourth slide</h2>
-        </div>
-      </div>
-
     </div>
-    
+
   )
 }
