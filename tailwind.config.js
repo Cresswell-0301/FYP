@@ -21,8 +21,40 @@ module.exports = {
       zIndex: {
         '100':100,
         '101':101,
-      }
+      },
 
+      width: {
+        '800': '800px',
+        'full*5': '500%',
+      },
+
+      height: {
+        '400': '400px',
+        '500': '500px',
+      },
+
+      borderRadius: {
+        '10': '10px',
+        '40': '40px',
+      },
+
+      transitionDuration: {
+        '2000': '2s',
+      },
+
+      padding: {
+        '1.25': '5px',
+      },
+
+      margin: {
+        '1.75': '7px',
+        '3.75': '15px',
+        '460': '460px',
+      },
+
+      maxWidth: {
+        'full*5': '500px',
+      }
 
     },
   },
