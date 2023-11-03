@@ -1,5 +1,54 @@
 import React, { useState, useEffect } from 'react';
 
+// Slide Show CSS Start
+const styles = `
+/* Slideshow */
+.slideshow {
+  margin: 15px auto;
+  overflow: hidden;
+  max-width: 98%;
+  max-height: 75%;
+  position: relative;
+}
+
+.slideshowSlider {
+  white-space: nowrap;
+  transition: ease 1000ms;
+  position: relative;
+}
+
+.slide {
+  display: inline-block;
+  height: 400px;
+  width: 100%;
+  border-radius: 40px;
+}
+
+/* Buttons */
+.slideshowDots {
+  text-align: center;
+}
+
+.slideshowDot {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 5px 7px 0px;
+  background-color: #c4c4c4;
+}
+
+.slideshowDot.active {
+  background-color: #6a0dad;
+}
+`;
+// Slide Show CSS End
+
+// Navigation Bar JS Start
+const imageUrls = ["/slide-image/image1.jpg", "/slide-image/image2.jpg", "/slide-image/image3.jpg", "/slide-image/image4.jpg", "/slide-image/image5.jpg"];
+const delay = 2500;
+
 export default function Navigation (){
     const [isBarHidden, setIsBarHidden] = useState(true);
     const [isButtonVisible, setIsButtonVisible] = useState(true);
@@ -11,16 +60,19 @@ export default function Navigation (){
     useEffect(() => {
         const handleResize = () => {
         const menuToggle = document.getElementById('mobile-menu-2');
+
         if (window.innerWidth <= 768) {
             setIsButtonVisible(true);
             if (isButtonVisible) {
-            menuToggle.style.display = isBarHidden ? 'none' : 'block';
+                menuToggle.style.display = isBarHidden ? 'none' : 'block';
             } else {
-            menuToggle.style.display = 'none';
+                menuToggle.style.display = 'none';
+                setIsBarHidden(true); // Ensure the bar is hidden on small screens
             }
         } else {
             setIsButtonVisible(false);
             menuToggle.style.display = 'block';
+            setIsBarHidden(true); // Ensure the bar is hidden on small screens
         }
         };
 
@@ -28,18 +80,48 @@ export default function Navigation (){
         handleResize();
 
         return () => {
-        window.removeEventListener('resize', handleResize);
+            window.removeEventListener('resize', handleResize);
         };
     }, [isBarHidden, isButtonVisible]);
 
     const mobileMenuStyle = {
         display: isBarHidden ? 'none' : 'block',
+        zIndex: 2,
     };
+// Navigation Bar JS End
+
+// Slide Show JS Start
+    const [index, setIndex] = React.useState(0);
+    const isReversed = React.useRef(false);
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            if (isReversed.current) {
+                setIndex((prevIndex) => (prevIndex - 1 < 0 ? imageUrls.length - 1 : prevIndex - 1));
+            } else {
+                setIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
+            }
+        }, delay);
+
+        return () => {
+            clearTimeout(timeoutId);
+        };
+    }, [index]);
+
+    useEffect(() => {
+        if (index === 4) {
+            isReversed.current = true;
+        } else if (index === 0) {
+            isReversed.current = false;
+        }
+    }, [index]);
+// SLide Show JS End
 
     return(
         <div>
-            <nav className="bg-white border-gray-200 py-2.5 dark:bg-gray-900">
-                <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
+            {/* Navigation Bar Start */}
+            <div className="bg-white border-gray-200 py-2.5 dark:bg-gray-900 fixed overflow-hidden w-full navbar z-101">
+                <div className="flex flex-wrap items-center justify-between max-w-full px-4 mx-auto">
                     <a href="#" className="flex items-center">
                         <img src="https://www.svgrepo.com/show/499962/music.svg" className="h-6 mr-3 sm:h-9" alt="Company Logo"/>
                         <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">FYP</span>
@@ -113,8 +195,37 @@ export default function Navigation (){
                         </ul>
                     </div>
                 </div>
-            </nav>
+            </div>
+            {/* Navigation Bar End */}
+
+            {/* Slide Show Start */}
+            <style>{styles}</style>
+
+            <div className='pt-13'>
+                <div className="slideshow">
+                    <div
+                      className="slideshowSlider"
+                      style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
+                    >
+                      {imageUrls.map((imageUrl, i) => (
+                        <img className="slide" key={i} src={imageUrl} alt={`Slide ${i + 1}`} />
+                      ))}
+                    </div>
+                    <div className="slideshowDots">
+                      {imageUrls.map((_, i) => (
+                        <div
+                          key={i}
+                          className={`slideshowDot${index === i ? " active" : ""}`}
+                          onClick={() => {
+                            setIndex(i);
+                          }}
+                        ></div>
+                      ))}
+                    </div>
+                </div>
+            </div>
+            {/* Slide Show End */}
 
         </div>
-    )
+    );
 }
