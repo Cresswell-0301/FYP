@@ -3,9 +3,10 @@ import React, { useEffect } from 'react';
 const styles = `
 /* Slideshow */
 .slideshow {
-  margin: 0 auto;
+  margin: 15px auto;
   overflow: hidden;
-  max-width: 500px;
+  max-width: 95%;
+  max-height: 75%;
 }
 
 .slideshowSlider {
