@@ -2,7 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/sideBar": "pages/sideBar.js",
-  "/slidesShow": "pages/slidesShow.js"
+  "/shoping-cart": "pages/shoping-cart.js"
 }
