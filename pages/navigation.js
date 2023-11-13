@@ -1,53 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
-// Slide Show CSS Start
-const styles = `
-/* Slideshow */
-.slideshow {
-  margin: 15px auto;
-  overflow: hidden;
-  max-width: 98%;
-  max-height: 75%;
-  position: relative;
-}
-
-.slideshowSlider {
-  white-space: nowrap;
-  transition: ease 1000ms;
-  position: relative;
-}
-
-.slide {
-  display: inline-block;
-  height: 400px;
-  width: 100%;
-  border-radius: 40px;
-}
-
-/* Buttons */
-.slideshowDots {
-  text-align: center;
-}
-
-.slideshowDot {
-  display: inline-block;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  cursor: pointer;
-  margin: 5px 7px 0px;
-  background-color: #c4c4c4;
-}
-
-.slideshowDot.active {
-  background-color: #6a0dad;
-}
-`;
-// Slide Show CSS End
+import SlidesShow from './slidesShow';
 
 // Navigation Bar JS Start
-const imageUrls = ["/slide-image/image1.jpg", "/slide-image/image2.jpg", "/slide-image/image3.jpg", "/slide-image/image4.jpg", "/slide-image/image5.jpg"];
-const delay = 2500;
 
 export default function Navigation (){
     const [isBarHidden, setIsBarHidden] = useState(true);
@@ -89,33 +43,6 @@ export default function Navigation (){
         zIndex: 2,
     };
 // Navigation Bar JS End
-
-// Slide Show JS Start
-    const [index, setIndex] = React.useState(0);
-    const isReversed = React.useRef(false);
-
-    useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            if (isReversed.current) {
-                setIndex((prevIndex) => (prevIndex - 1 < 0 ? imageUrls.length - 1 : prevIndex - 1));
-            } else {
-                setIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
-            }
-        }, delay);
-
-        return () => {
-            clearTimeout(timeoutId);
-        };
-    }, [index]);
-
-    useEffect(() => {
-        if (index === 4) {
-            isReversed.current = true;
-        } else if (index === 0) {
-            isReversed.current = false;
-        }
-    }, [index]);
-// SLide Show JS End
 
     return(
         <div>
@@ -197,34 +124,6 @@ export default function Navigation (){
                 </div>
             </div>
             {/* Navigation Bar End */}
-
-            {/* Slide Show Start */}
-            <style>{styles}</style>
-
-            <div className='pt-13'>
-                <div className="slideshow">
-                    <div
-                      className="slideshowSlider"
-                      style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
-                    >
-                      {imageUrls.map((imageUrl, i) => (
-                        <img className="slide" key={i} src={imageUrl} alt={`Slide ${i + 1}`} />
-                      ))}
-                    </div>
-                    <div className="slideshowDots">
-                      {imageUrls.map((_, i) => (
-                        <div
-                          key={i}
-                          className={`slideshowDot${index === i ? " active" : ""}`}
-                          onClick={() => {
-                            setIndex(i);
-                          }}
-                        ></div>
-                      ))}
-                    </div>
-                </div>
-            </div>
-            {/* Slide Show End */}
 
         </div>
     );

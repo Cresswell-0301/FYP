@@ -6,12 +6,10 @@ const Text = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-
-
 `;
 
 const H2 = styled.h2`
-    font-size: 6em;
+    font-size: 2em;
     color: #333;
     position: relative;
 

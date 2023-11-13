@@ -1,10 +1,14 @@
 import styled from "styled-components"
 import React, { useState } from 'react';
+import Navigation from "./navigation";
 
 const Container = styled.div`
     background-color: rgb(209, 213, 219);
     height: 100vh;
-    padding: 2rem 0;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+    padding-left: 0;
+    padding-right: 0;
 `;
 
 const SubContainer = styled.div`
@@ -155,9 +159,16 @@ const SubmitBtn = styled.button`
     border-radius: 0.5rem;
     margin-top: 1rem;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:hover {
         background-color: #a6a6a6;
+
+        H2 {
+            color: black;
+        }
     }
 `;
 
@@ -167,16 +178,12 @@ const H2 = styled.h2`
     color: gray;
     position: relative;
 
-    &:hover {
-        color: black;
-    }
-
     &::after {
         content: "Checkout";
         position: absolute;
-        padding: 0 6.48rem;
+        padding: 0 6.25rem;
         top: 0;
-        left: 0;
+        left: -100px;
         color: teal;
 
         clip-path: ellipse(
@@ -199,7 +206,7 @@ const H2 = styled.h2`
         }
 
         background-image: linear-gradient(
-            60deg, #00d0ff, #4dff03, #ff0058,#ffbc00, #ff0058
+            60deg, #00d0ff, #4dff03, #ff0058, #ffbc00
         );
         -webkit-background-clip: text;
         color: transparent;
@@ -211,6 +218,8 @@ export default function ShoppingCart(){
 
     return(
         <div>
+            <Navigation/>
+
             <Container>
                 <SubContainer>
                     <Header>Shopping Cart</Header>

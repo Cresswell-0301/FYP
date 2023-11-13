@@ -156,6 +156,14 @@ export default function Home(){
             </a>  
           </div>
 
+          <div className="px-6 sm:px-0 py-2">
+            <a href="/debug">
+              <button type="button" className="py-2 px-4 flex w-full justify-center items-center bg-green-500 hover:bg-green-700 hover:text-white focus:ring-green-300 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
+                Debugging Page
+             </button>
+            </a>  
+          </div>
+
         </div>
       </div>
     </div>
