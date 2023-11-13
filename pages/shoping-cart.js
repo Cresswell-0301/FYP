@@ -37,11 +37,34 @@ const SubContainer = styled.div`
     }
 `;
 
-const Header = styled.h1`
+const LoadText = styled.div`
+    color: white;
     font-size: 1.5rem;
     line-height: 2rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+`;
+
+const Span = styled.span`
+    @keyframes upDown {
+        0% {
+            transform: translateY(0px);
+        }
+        20% {
+            transform: translateY(-24px);
+        }
+        40% , 100% {
+            transform: translateY(0px);
+        }
+    }
+    display: inline-block;
+    animation: upDown 1.5s ease-in-out infinite;
+    animation-delay: ${props => props.i * 0.1}s;
+`;
+
+const Hide = styled.span`
+    visibility: hidden;
 `;
 
 const BoxContainer = styled.div`
@@ -222,7 +245,23 @@ export default function ShoppingCart(){
 
             <Container>
                 <SubContainer>
-                    <Header>Shopping Cart</Header>
+
+                    <LoadText>
+                        <Span i={1}>S</Span>
+                        <Span i={2}>h</Span>
+                        <Span i={3}>o</Span>
+                        <Span i={4}>p</Span>
+                        <Span i={5}>p</Span>
+                        <Span i={6}>i</Span>
+                        <Span i={7}>n</Span>
+                        <Span i={8}>g</Span>
+                        <Hide>_</Hide>
+                        <Span i={9}>C</Span>
+                        <Span i={10}>a</Span>
+                        <Span i={11}>r</Span>
+                        <Span i={12}>t</Span>
+                    </LoadText>
+
                     <BoxContainer>
                         <Cart>
                             <CartBox>
