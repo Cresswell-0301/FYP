@@ -8,7 +8,7 @@ const Container = styled.div`
 `;
 
 const MiniContainer = styled.div`
-    width: 160px;
+    width: 180px;
     height: 100vh;
     background-color: rgb(229, 231, 235);
     position: sticky;
@@ -29,7 +29,7 @@ const Option = styled.li`
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    height: 70px;
     cursor: pointer;
 
     &:hover {
@@ -108,6 +108,11 @@ const BatteryLevel = styled.div`
     position: absolute;
 `;
 
+const Img = styled.img`
+    height: 40px;
+    width: auto;
+`;
+
 export default function SideBar(){
     return (
         <div>
@@ -135,18 +140,22 @@ export default function SideBar(){
 
                         <Option>
                             <A href="#">Cable</A>
+                            <Img src="./cableicon.png" alt="Icon Error"/>
                         </Option>
 
                         <Option>
                             <A href="#">Charger</A>
+                            <Img src="./phonecharger.png" alt="Icon Error"/>
                         </Option>
 
                         <Option>
                             <A href="#">Screen Protection</A>
+                            <Img src="./protector.png" alt="Icon Error"/>
                         </Option>
 
                         <Option>
                             <A href="#">Phone Case</A>
+                            <Img src="./phonecase.png" alt="Icon Error"/>
                         </Option>
                     </Select>
                 </MiniContainer>
