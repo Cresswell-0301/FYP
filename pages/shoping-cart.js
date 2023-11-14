@@ -5,7 +5,7 @@ import Navigation from "./navigation";
 const Container = styled.div`
     background-color: rgb(209, 213, 219);
     height: 100vh;
-    padding-top: 4rem;
+    padding-top: 0.25rem;
     padding-bottom: 2rem;
     padding-left: 0;
     padding-right: 0;
