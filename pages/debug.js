@@ -1,233 +1,167 @@
 import styled from "styled-components";
-import React, { useState, useEffect } from 'react';
+import Navigation from "./navigation";
 
 const Container = styled.div`
-    position: relative;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem 1rem;
-    margin-top: 0.5rem;
-
-    @media (min-width: 640px) {
-        height: 40px;
-    }
-
-    @media (min-width: 768px) {
-        justify-content: center;
-    }
-`;
-
-const LogoContainer = styled.div`
-    display: flex;
-    align-items: center;
-    flex: 1 1 0%;
-
-    @media (min-width: 768px) {
-        position: absolute;
-        top: 0px;
-        bottom: 0px;
-        left: 10px;
-    }
-`;
-
-const LogoSubContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     width: 100%;
-
-    @media (min-width: 768px) {
-        width: auto;
-    }
+    background-color: white;
 `;
 
-const LogoImg = styled.img`
-    height: 40px;
-    width: 40px;
+const MiniContainer = styled.div`
+    width: 180px;
+    height: 100vh;
+    background-color: rgb(229, 231, 235);
+    position: sticky;
+    top: 0;
+    padding: 16px;
 `;
 
-const NavBtn = styled.div`
-    margin-left: 0.5rem;
+const Select = styled.ul`
+    list-style-type: none;
+    /* text-align: center; */
+
+`;
+
+const Option = styled.li`
+    margin-bottom: 0.5rem;
+    border-radius: 10px;
+    padding: 8px 4px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-
-    @media (min-width: 768px) {
-        display: none;
-    }
-`;
-
-const Btn = styled.button`
-    border: none;
-    background: none;
-    padding: 8px;
-    border-radius: 4px;
-    color: #ccc;
-    transition: background-color 0.15s ease-in-out;
+    height: 70px;
+    cursor: pointer;
 
     &:hover {
-        color: #555;
-        background-color: #f0f0f0;
-    }
-
-    &:focus {
-        color: #555;
-        background-color: #f0f0f0;
-        outline: none;
-    }
-`;
-
-const Svg = styled.svg`
-    height: 1.5rem;
-    width: 1.5rem;
-`;
-
-const List = styled.div`
-      display: ${props => (props.showMenu ? 'flex' : 'none')};
-
-    @media (min-width: 768px) {
-        display: flex;
-
-        > * + * {
-            margin-left: 2.5rem;
+        background-color: darkgray;
+        A {
+            color: white;
         }
+
+        Svg {
+            fill: white;
+        }
+
     }
 `;
 
 const A = styled.a`
+    color: rgb(55, 65, 81);
+    font-weight: 600;
     font-size: 18px;
-    color: lightgray;
-    transition: color 0.15s ease-in-out;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
 `;
 
-const LoginPart = styled.div`
-    display: none;
-    padding-right: 10px;
+const Detail = styled.div`
+    width: 75%;
+    background-color: white;
+    padding: 1rem;
+    color: black;
+`;
 
-    @media (min-width: 768px) {
+const Svg = styled.svg`
+    fill: #4f4f4f;
+    height: 1em;
+`;
+
+const Battery = styled.div`
+    border: 3px solid #333;
+    width: 18px;
+    height: 28px;
+    padding: 2px;
+    border-radius: 4px;
+    position: relative;
+    margin: 15px 0;
+
+    &:before {
+        content: '';
+        height: 3px;
+        width: 10px;
+        display: block;
         position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        top: 0px;
-        bottom: 0px;
-        right: 0px;
+        top: -6px;
+        border: 2px solid #333;
+        border-radius: 4px 4px 0 0;
+    }
+
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        right: -1px;
+        bottom: -1px;
+        border: 1px solid #fff;
+        border-radius: 2px;
     }
 `;
 
-const Span = styled.span`
-    display: inline-flex;
-    border-radius: 6px;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    margin-left: 8px;
+const BatteryLevel = styled.div`
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%3E%3C%2Fg%3E%20%3Cpath%20fill%3D%22%23e81309%22%20d%3D%22M17.927%2012l2.68-10.28c0.040-0.126%200.060-0.261%200.060-0.4%200-0.726-0.587-1.32-1.314-1.32-0.413%200-0.78%200.187-1.019%200.487l-13.38%2017.353c-0.18%200.227-0.287%200.513-0.287%200.827%200%200.733%200.6%201.333%201.333%201.333h8.073l-2.68%2010.28c-0.041%200.127-0.060%200.261-0.060%200.4%200.001%200.727%200.587%201.32%201.314%201.32%200.413%200%200.78-0.186%201.020-0.487l13.379-17.353c0.181-0.227%200.287-0.513%200.287-0.827%200-0.733-0.6-1.333-1.333-1.333h-8.073z%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-size: 18px;
+    height: 18px;
+    width: 18px;
+    margin-left: -4px;
+    content: '';
+    display: inline-block;
+    position: absolute;
 `;
 
-const Login = styled.a`
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 16px;
-    border-width: 1px;
-    border-color: transparent;
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 500;
-    border-radius: 6px;
-    color: white;
-    background-color: blue;
-    transition-duration: 150ms;
-    transition: ease-in-out;
-    
-    &:hover {
-        background-color: darkblue;
-    }
-
-    &:focus {
-        outline: none;
-        border-color: darkblue;
-    }
-    
-`;
-
-const Button = styled.button`
-    width: auto;
+const Img = styled.img`
     height: 40px;
-    border-radius: 6px;
-    padding: 0 10px;
-
-    &:hover {
-        background-color: #545454;
-        
-        A {
-            color: white;
-        }
-    }
+    width: auto;
 `;
 
-const LoginSvg = styled.svg`
-    height: 1.3em;
-    padding: 0 10px;
-    fill: #ffffff;
-`;
-
-export default function Debug (){
-    const [showMenu, setShowMenu] = useState(false);
-
-    const toggleMenu = () => {
-        setShowMenu(!showMenu);
-    };
-
-    const closeMenuOnResize = () => {
-        if (window.innerWidth >= 768) {
-            setShowMenu(false);
-        }
-    };
-    
-    useEffect(() => {
-        window.addEventListener('resize', closeMenuOnResize);
-        return () => {
-            window.removeEventListener('resize', closeMenuOnResize);
-        };
-    }, []);
-     
+export default function SideBar(){
     return (
         <div>
+            <Navigation/>
+
             <Container>
-                <LogoContainer>
-                    <LogoSubContainer>
-                        <a href="#" aria-label="Home">
-                            <LogoImg src="https://www.svgrepo.com/show/491978/gas-costs.svg" />
-                        </a>
-                    </LogoSubContainer>
-                </LogoContainer>
+                <MiniContainer>
 
-                <List showMenu={showMenu}>
-                    <Button><A href="#">Home</A></Button>
-                    <Button><A href="#">Promotion</A></Button>
-                    <Button><A href="#">Category</A></Button>
-                    <Button><A href="#">About Us</A></Button>
-                </List>
+                    <Select>
+                        <Option onClick={() => window.location.href = "#"}>
+                            <A>Brand</A>
+                            <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path d="M470.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 256 265.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160zm-352 160l160-160c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L210.7 256 73.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z"/>
+                            </Svg>
+                        </Option>
 
-                <NavBtn>
-                    <Btn type="button" id="main-menu" aria-label="Main menu" aria-haspopup="true" onClick={toggleMenu}>
-                        <Svg stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </Svg>
-                    </Btn>
-                </NavBtn>
+                        <Option onClick={() => window.location.href = "#"}>
+                            <A>Power Bank</A>
 
-                <LoginPart>
-                    <Span>
-                        <Login href="#" title="Login / Sign Up">
-                            <LoginSvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z"/>
-                            </LoginSvg>
-                        </Login>
-                    </Span>
-                </LoginPart>
+                            <Battery>
+                                <BatteryLevel></BatteryLevel>
+                            </Battery>
 
+                        </Option>
+
+                        <Option onClick={() => window.location.href = "#"}>
+                            <A>Cable</A>
+                            <Img src="./cableicon.png" alt="Icon Error"/>
+                        </Option>
+
+                        <Option onClick={() => window.location.href = "#"}>
+                            <A>Charger</A>
+                            <Img src="./phonecharger.png" alt="Icon Error"/>
+                        </Option>
+
+                        <Option onClick={() => window.location.href = "#"}>
+                            <A>Screen Protection</A>
+                            <Img src="./protector.png" alt="Icon Error"/>
+                        </Option>
+
+                        <Option onClick={() => window.location.href = "#"}>
+                            <A>Phone Case</A>
+                            <Img src="./phonecase.png" alt="Icon Error"/>
+                        </Option>
+                    </Select>
+
+                </MiniContainer>
+
+                <Detail>Content</Detail>
             </Container>
         </div>
     )
