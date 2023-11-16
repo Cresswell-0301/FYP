@@ -1,3 +1,5 @@
+import ChatBox from "./chatbox";
+
 export default function Home(){
   return(
     <div>
@@ -166,6 +168,9 @@ export default function Home(){
 
         </div>
       </div>
+
+      <ChatBox/>
+      
     </div>
 
   )
