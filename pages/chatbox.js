@@ -1,6 +1,6 @@
 import Script from "next/script";
 
-export default function ChatBox (){
+export default function ChatBox() {
     return (
         <div>
             <Script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></Script>
