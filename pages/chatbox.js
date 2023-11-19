@@ -2,9 +2,7 @@ import styled from "styled-components";
 import React, { useState, useEffect } from 'react';
 
 const Main = styled.div`
-    height: 2000px;
     width: 100%;
-    background-color: black;
 `;
 
 const Container = styled.div`
