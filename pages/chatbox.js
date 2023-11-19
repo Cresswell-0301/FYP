@@ -19,7 +19,7 @@ const Container = styled.div`
     z-index: 2;
 
     &:hover {
-
+        background-color: rgb(162, 233, 255);
     }
 `;
 
@@ -84,7 +84,7 @@ const CloseBtn = styled.div`
         left: 50%;
         width: 5px;
         height: 20px;
-        background-color: #F0F0F0;
+        background-color: #acacac;
         transform: rotate(45deg) translate(-50%, -50%);
         transform-origin: top left;
         content: '';
@@ -163,11 +163,6 @@ const BtnBox = styled.div`
     /* background-color: red; */
 `;
 
-const ChatBtn = styled.button`
-    background-color: lightblue;    
-    border-radius: 15px;
-`;
-
 const P3 = styled.p`
     padding: 10px 88.9px;
     font-size: 13px;
@@ -175,42 +170,62 @@ const P3 = styled.p`
     color: black;
     text-align: center;
 `;
+
+const ChatBtn = styled.button`
+    background-color: lightblue;    
+    border-radius: 15px;
+
+    &:hover {
+        background-color: rgb(136, 187, 205);
+        
+        ${P3} {
+            color: white;
+        }
+    }
+`;
   
 export default function Debug(){
 
     // Show Message Box
     const ShowMessage = () => {
         const box = document.getElementById("ContainerBox");
-        box.style.display = 'block';
-
-        // Dot Dot Show Message
-        const mss = document.getElementById("Message");
-        const RealMss = document.getElementById("Last");
-        const messages = ["<P2>。</P2>", "<P2>。。</P2>", "<P2>。。。</P2>"];   // Define the dot messages to be displayed
-
-        RealMss.style.display = 'none';
-
-        function displayMessage(index) {
-            if (index < messages.length) {
-                mss.innerHTML = messages[index];
-                mss.style.display = 'block';
         
-                setTimeout(function () {
-                    mss.style.display = 'none';
-                    displayMessage(index + 1);
-                }, 500);
+        if(box.style.display === 'none'){   // Display Chat Box if the Chat Box haven display
+            box.style.display = 'block';
 
-            } else {
-                // After displaying all dot messages, set RealMss.style.display to 'block'
-                RealMss.style.display = 'block';
+            // Dot Dot Show Message
+            const mss = document.getElementById("Message");
+            const RealMss = document.getElementById("Last");
+            const messages = ["<P2>。</P2>", "<P2>。。</P2>", "<P2>。。。</P2>"];   // Define the dot messages to be displayed
+
+            RealMss.style.display = 'none';
+
+            setTimeout(function () {
+                displayMessage(0);
+            }, 100);
+
+            function displayMessage(index) {
+                if (index < messages.length) {
+                    mss.innerHTML = messages[index];
+                    mss.style.display = 'block';
+            
+                    setTimeout(function () {
+                        mss.style.display = 'none';
+                        displayMessage(index + 1);
+                    }, 500);
+        
+                } else {
+                    // After displaying all dot messages, set RealMss.style.display to 'block'
+                    RealMss.style.display = 'block';
+                }
             }
         }
+        else if(box.style.display === 'block'){ // Close Chat Box if the Chat Box displayed
+            CloseMessage();
+        }
 
-        setTimeout(function () {
-            displayMessage(0);
-        }, 1000);
     };
-    
+
     // To Messenger Chat
     const ChatPage = () => {
         location.href = 'https://www.messenger.com/t/154811617722587/?messaging_source=source%3Apages%3Amessage_shortlink&source_id=1441792&recurring_notification=0';
@@ -282,9 +297,6 @@ export default function Debug(){
                     </BtnBox>
                 </ContainerBox>
             </Main>
-
-            {/* <Script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></Script> */}
-            {/* <div class="elfsight-app-d357eb6f-d7b1-405f-8bdf-7768f7f921c0" data-elfsight-app-lazy></div> */}
         
         </div>
     )
