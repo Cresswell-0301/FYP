@@ -1,175 +1,456 @@
 import ChatBox from "./chatbox";
+import styled from "styled-components";
+
+const Container = styled.div`
+    display: flex;
+    height: 100%;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 1.5rem;
+    @media (min-width: 1024px) {
+        padding: 1.5rem;
+    }
+    background-color: #2D3748;
+`;
+
+const Top = styled.div`
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 24rem;
+    @media (min-width: 640px) {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        max-width: 24rem;
+    }
+`;
+
+const Img = styled.img`
+    margin-left: auto;
+    margin-right: auto;
+    height: 2.5rem;
+    width: auto;
+`;
+
+const TxtContainer = styled.div`
+    border-radius: 0.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const H2 = styled.h2`
+    margin-top: 2rem;
+    text-align: center;
+    font-weight: bold;
+    line-height: 2.25rem;
+    letter-spacing: -0.025em;
+    color: #4299E1;
+    font-size: 1.5em;
+    position: relative;
+    
+    &::after {
+        content: "Login/SignUp";
+        position: absolute;
+        padding: 0 6.25rem;
+        top: 0;
+        left: -100px;
+        color: teal;
+
+        clip-path: ellipse(
+            100px 100px at 0% center
+        );
+
+        animation: animate 8s infinite;
+
+        @keyframes animate {
+            0% , 100% {
+                clip-path: ellipse(
+                    100px 100px at 0% center
+                );
+            }
+            50%{
+                clip-path: ellipse(
+                    100px 100px at 100% center
+                );
+            }
+        }
+
+        background-image: linear-gradient(
+            60deg, #00d0ff, #4dff03, #ff0058, #ffbc00
+        );
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+`;
+
+const Space = styled.span`
+    /* padding: 0 2px; */
+`;
+
+const InputContainer = styled.div`
+    margin-top: 2.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 24rem;
+    @media (min-width: 640px) {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        max-width: 24rem;
+    }
+`;
+
+const Form = styled.form`
+    --space-y-reverse: 0;
+    margin-top: calc(1.5rem * calc(1 - var(--space-y-reverse)));
+    margin-bottom: calc(1.5rem * var(--space-y-reverse));
+
+    & > :not([hidden]) ~ :not([hidden]) {
+        --space-y-reverse: 0;
+        margin-top: calc(1.5rem * calc(1 - var(--space-y-reverse)));
+        margin-bottom: calc(1.5rem * var(--space-y-reverse));
+    }
+`;
+
+const Label = styled.div`
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    color: #4299E1;
+`;
+
+const InputDiv = styled.div`
+    margin-top: 0.5rem;
+`;
+
+const Input = styled.input`
+    display: block;
+    width: 100%;
+    border-radius: 6px;
+    border-width: 0px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 8px;
+    color: rgb(17, 24, 39);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    outline: 1px solid #D1D5DB;
+    outline-offset: 1px inset;
+
+    &::placeholder {
+        color: rgb(156 163 175);
+    }
+
+    &:focus {
+        outline: 4px solid #4C51BF;
+        outline-offset: 2px;
+    }
+
+    @media (min-width: 640px) {
+        font-size: 0.875rem;
+        line-height: 1.5rem;
+    }
+`;
+
+const PsdDiv = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+const ForgotDiv = styled.div`
+    font-size: 0.75rem;
+    margin-top: 3px;
+    float: right;
+`;
+
+const FgtA = styled.a`
+    font-weight: 600;
+    color: #4299E1;
+    
+    &:hover {
+        color: #667EEA;
+        text-decoration: underline;
+    }
+`;
+
+const BtnContainer = styled.div`
+    padding-top: 1rem;
+`;
+
+const Button = styled.button`
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    border-radius: 0.375rem;
+    background-color: #4C51BF;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    color: #FFFFFF;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    &:hover {
+        background-color: #667EEA;
+    }
+    &:focus-visible {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+        background-color: #4C51BF;
+    }
+`;
+
+const Field = styled.fieldset`
+    margin-top: 2.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #A0AEC0;
+    padding-bottom: 1.25rem;
+    border-top: dotted #718096;
+`;
+
+const Legend = styled.legend`
+    padding: 0 6px;
+`;
+
+const OtherLoginMtd = styled.div`
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    @media (min-width: 640px) {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    padding-top: 1px;
+    padding-bottom: 2px;
+`;
+
+const OthMtd = styled(OtherLoginMtd)`
+    padding-top: 8px;
+    padding-bottom: 8px;
+`;
+
+const GoogleBtn = styled.button`
+    color: #718096;
+    font-weight: 600;
+    width: 100%;
+    background-color: #ffffff;
+    &:hover {
+        background-color: gray;
+        color: white;
+    }
+    &:focus {
+        outline: 4px solid transparent;
+        outline-offset: 0;
+        background-color: #ffffff;
+    }
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    transition-duration: 200ms;
+    padding: 0.625rem 1.25rem;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+`;
+
+const GImg = styled.img`
+    width: 1.5rem;
+    height: 1.5rem;
+`;
+
+const FbBtn = styled.button`
+    padding: 0.5rem 1rem;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4299E1;
+    &:hover {
+        background-color: #2B6CB0;
+        color: #FFFFFF;
+    }
+    &:focus {
+        outline: 2px solid #4299E1;
+        outline-offset: 2px;
+        background-color: #4299E1;
+    }
+    color: #FFFFFF;
+    transition: ease-in 200ms;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-radius: 0.375rem;
+`;
+
+const Svg = styled.svg`
+    margin-right: 8px;
+    width: 28px;
+    height: 24px;
+`;
+
+const OthBtn = styled.button`
+    padding: 0.5rem 1rem;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(90,193,133);
+    color: white;
+    transition: ease-in 0.2s;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-radius: 0.375rem;
+
+    &:hover {
+        background-color: #2F855A;
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px #68D391, 0 0 0 4px #C6F6D5;
+    }
+`;
 
 export default function Home(){
   return(
     <div>
-        <div className="flex h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-gray-800">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-blue-300">
-            Login / Sign Up
-          </h2>
-        </div>
+        <Container>
+            <Top>
+                <Img src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="#"/>
+                <TxtContainer>
+                    <H2>Login<Space></Space>/<Space></Space>Sign<Space></Space>Up</H2>
+                </TxtContainer>
+            </Top>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-blue-300">
-                Email address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-blue-300 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
+            <InputContainer>
+                <Form action="#" method="POST">
+                    <div>
+                        <Label htmlFor="email">Email address</Label>
+                        <InputDiv>
+                            <Input id="email" name="email" type="email" autoComplete="email" required/>
+                        </InputDiv>
+                    </div>
 
-            <div>
-              <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-blue-300">
-                  Password
-                </label>
-              </div>
+                    <div>
+                        <PsdDiv>
+                            <Label htmlFor="password">Password</Label>
+                        </PsdDiv>
 
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
+                        <InputDiv>
+                            <Input id="password" name="password" type="password" autoComplete="current-password" required/>
+                        </InputDiv>
 
-              <div className="text-xs float-right">
-                <a href="#" className="font-semibold text-indigo-300 hover:text-indigo-500 hover:underline">
-                  Forgot password?
-                </a>
-              </div>
+                        <ForgotDiv>
+                            <FgtA href="#">Forgot password ?</FgtA>
+                        </ForgotDiv>
 
-            </div>
+                    </div>
 
-            <div className="pt-4">
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                Proceed
-              </button>
-            </div>
-          </form>
+                    <BtnContainer>
+                        <Button type="submit">Proceed</Button>
+                    </BtnContainer>
+                </Form>
 
-          <p className="mt-10 text-center text-sm text-gray-500 pb-5">
-            --------------------------<span className="text-gray-450"> or Login with </span>--------------------------
-          </p>
+                <Field>
+                    <Legend>or Login with</Legend>
+                </Field>
 
-          <div className="px-6 sm:px-0">
-            <button type="button"
-            className="text-gray-600
-            font-semibold
-            w-full
-            bg-[#ffffff]
-            hover:bg-slate-400
-            hover:text-black 
-            focus:ring-4 
-            focus:outline-none 
-            focus:ring-white
-            rounded-lg 
-            text-base 
-            duration-200
-            px-5 
-            py-2.5 
-            text-center 
-            inline-flex 
-            items-center 
-            justify-between 
-            mr-2 mb-2">
-            <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo"/>
-            Sign in with Google
-            <span></span>
-            </button>
-          </div>
+                <OtherLoginMtd>
+                    <GoogleBtn type="button">
+                        <GImg src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo"/>
+                        Sign in with Google
+                        <span></span>
+                    </GoogleBtn>
+                </OtherLoginMtd>
 
-          <div className="px-6 sm:px-0">
-            <button type="button" className="py-2 px-4 flex w-full justify-between items-center bg-blue-500 hover:bg-blue-800 hover:text-white focus:ring-blue-400 focus:ring-offset-blue-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
-              <svg fill="currentColor" className="mr-2 w-7 h-6" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"></path>
-              </svg>
-              Sign in with Facebook
-              <span></span>
-            </button>  
-          </div>
+                <OtherLoginMtd>
+                    <FbBtn type="button">
+                        <Svg fill="currentColor" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"></path>
+                        </Svg>
+                        Sign in with Facebook
+                        <span></span>
+                    </FbBtn>  
+                </OtherLoginMtd>
 
-          <div className="px-6 sm:px-0 py-2">
-            <a href="/scroll-down">
-              <button type="button" className="py-2 px-4 flex w-full justify-center items-center bg-green-500 hover:bg-green-700 hover:text-white focus:ring-green-300 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
-                Scroll Down Page
-             </button>
-            </a>  
-          </div>
+                <OthMtd>
+                    <a href="/scroll-down">
+                        <OthBtn type="button">
+                            Scroll Down Page
+                        </OthBtn>
+                    </a>  
+                </OthMtd>
 
-          <div className="px-6 sm:px-0 py-2">
-            <a href="/navigation">
-              <button type="button" className="py-2 px-4 flex w-full justify-center items-center bg-green-500 hover:bg-green-700 hover:text-white focus:ring-green-300 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
-                Navigation Bar Page
-             </button>
-            </a>  
-          </div>
+                <OthMtd>
+                    <a href="/navigation">
+                        <OthBtn type="button">
+                            Navigation Bar Page
+                        </OthBtn>
+                    </a>  
+                </OthMtd>
 
-          <div className="px-6 sm:px-0 py-2">
-            <a href="/slidesShow">
-              <button type="button" className="py-2 px-4 flex w-full justify-center items-center bg-green-500 hover:bg-green-700 hover:text-white focus:ring-green-300 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
-                Slides Show Page
-             </button>
-            </a>  
-          </div>
+                <OthMtd>
+                    <a href="/slidesShow">
+                        <OthBtn type="button">
+                            Slides Show Page
+                        </OthBtn>
+                    </a>  
+                </OthMtd>
           
-          <div className="px-6 sm:px-0 py-2">
-            <a href="/sideBar">
-              <button type="button" className="py-2 px-4 flex w-full justify-center items-center bg-green-500 hover:bg-green-700 hover:text-white focus:ring-green-300 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
-                Sidebar Page
-             </button>
-            </a>  
-          </div>
+                <OthMtd>
+                    <a href="/sideBar">
+                        <OthBtn type="button">
+                            Sidebar Page
+                        </OthBtn>
+                    </a>  
+                </OthMtd>
 
-          <div className="px-6 sm:px-0 py-2">
-            <a href="/shoping-cart">
-              <button type="button" className="py-2 px-4 flex w-full justify-center items-center bg-green-500 hover:bg-green-700 hover:text-white focus:ring-green-300 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
-                Shopping Cart Page
-             </button>
-            </a>  
-          </div>
+                <OthMtd>
+                    <a href="/shoping-cart">
+                        <OthBtn type="button">
+                            Shopping Cart Page
+                        </OthBtn>
+                    </a>  
+                </OthMtd>
 
-          <div className="px-6 sm:px-0 py-2">
-            <a href="/colorText">
-              <button type="button" className="py-2 px-4 flex w-full justify-center items-center bg-green-500 hover:bg-green-700 hover:text-white focus:ring-green-300 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
-                Color Text Page
-             </button>
-            </a>  
-          </div>
+                <OthMtd>
+                    <a href="/colorText">
+                        <OthBtn type="button">
+                            Color Text Page
+                        </OthBtn>
+                    </a>  
+                </OthMtd>
 
-          <div className="px-6 sm:px-0 py-2">
-            <a href="/debug">
-              <button type="button" className="py-2 px-4 flex w-full justify-center items-center bg-green-500 hover:bg-green-700 hover:text-white focus:ring-green-300 focus:ring-offset-green-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
-                Debugging Page
-             </button>
-            </a>  
-          </div>
+                <OthMtd>
+                    <a href="/shop">
+                        <OthBtn type="button">
+                            Shopping Page
+                        </OthBtn>
+                    </a>  
+                </OthMtd>
 
-        </div>
-      </div>
+                <OthMtd>
+                    <a href="/debug">
+                        <OthBtn type="button">
+                            Debugging Page
+                        </OthBtn>
+                    </a>  
+                </OthMtd>
 
-      <ChatBox/>
+            </InputContainer>
+
+            <ChatBox/>
+
+        </Container>
       
     </div>
 

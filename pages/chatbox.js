@@ -183,12 +183,12 @@ const ChatBtn = styled.button`
 `;
   
 export default function Debug(){
-
     // Show Message Box
     const ShowMessage = () => {
         const box = document.getElementById("ContainerBox");
-        
-        if(box.style.display === 'none'){   // Display Chat Box if the Chat Box haven display
+                
+        if(!box.style.display || box.style.display == "none"){   // Display Chat Box if the Chat Box haven display            
+            
             box.style.display = 'block';
 
             // Dot Dot Show Message
@@ -217,11 +217,9 @@ export default function Debug(){
                     RealMss.style.display = 'block';
                 }
             }
+        } else {
+            box.style.display = 'none'; // Close Chat Box if the Chat Box displayed
         }
-        else if(box.style.display === 'block'){ // Close Chat Box if the Chat Box displayed
-            CloseMessage();
-        }
-
     };
 
     // To Messenger Chat
