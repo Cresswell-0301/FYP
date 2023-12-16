@@ -44,7 +44,7 @@ const styles = `
 const imageUrls = ["/slide-image/image1.jpg", "/slide-image/image2.jpg", "/slide-image/image3.jpg", "/slide-image/image4.jpg", "/slide-image/image5.jpg"];
 const delay = 2500;
 
-function Slideshow() {
+export default function Slideshow() {
   const [index, setIndex] = React.useState(0);
   const isReversed = React.useRef(false);
 
@@ -97,5 +97,3 @@ function Slideshow() {
     </div>
   );
 }
-
-export default Slideshow;

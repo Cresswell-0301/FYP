@@ -31,21 +31,25 @@ const Img = styled.img`
 
 const ContainerBox = styled.div`
     background-color: white;
-    height: 300px;
-    width: 300px;
+    height: 500px;
+    width: 320px;
     position: fixed;
     right: 1vw;
-    bottom: 105px;
-    border-radius: 20px;
+    bottom: 154px;
     font-family: Arial, Helvetica, sans-serif;
     display: none;
+    scroll-behavior: smooth;
+    overflow: auto;
 `;
 
 const HeadContainer = styled.div`
     background-color: lightblue;
     border-radius: 20px 20px 0px 0px;
-    height: 20%;
+    width: 320px;
+    height: 60px;
+    margin-top: -59px;
     display: grid;
+    position: fixed;
 `;
 
 const H1 = styled.h1`
@@ -71,8 +75,6 @@ const CloseBtn = styled.div`
     top: 15px;
     right: 18px;
     display: block;
-    /* width: fit-content; */
-    /* height: fit-content; */
     font-size: 0;
     background-color: red;
 
@@ -125,6 +127,7 @@ const MessageBox = styled.div`
     min-height: 55px;
     padding: 5px 10px;
     margin-left: 10px;
+    margin-bottom: 10px;
     border-radius: 8px;
 `;
 
@@ -154,11 +157,43 @@ const Span = styled.span`
     }
 `;
 
+const MessageBoxRight = styled(MessageBox)`
+    background-color: transparent;
+    width: 60%;
+    height: auto;
+    min-height: 55px;
+    margin-right: 10px;
+    margin-left: auto;
+    margin-bottom: 0;
+`;
+
+const RpyBox = styled(MessageBox)`
+    display: none;
+`;
+
+const Btn = styled.button`
+    border: 0.75px solid lightblue;
+    border-radius: 10px;
+    width: 100%;
+    padding: 5px 10px;
+    text-align: left;
+    color: black;
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: none;
+`;
+
 const BtnBox = styled.div`
-    margin: auto;
-    width: 80%;
-    margin-top: 100px;
-    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 104px;
+    background-color: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding-bottom: 10px;
+    width: 320px;
+    position: fixed;
 `;
 
 const P3 = styled.p`
@@ -172,6 +207,7 @@ const P3 = styled.p`
 const ChatBtn = styled.button`
     background-color: lightblue;    
     border-radius: 15px;
+    width: max-content;
 
     &:hover {
         background-color: rgb(136, 187, 205);
@@ -181,22 +217,46 @@ const ChatBtn = styled.button`
         }
     }
 `;
-  
+
 export default function Debug(){
     // Show Message Box
     const ShowMessage = () => {
         const box = document.getElementById("ContainerBox");
-                
+        
+        const b1 = document.getElementById("b1");
+        const b2 = document.getElementById("b2");
+        const b3 = document.getElementById("b3");
+        const b4 = document.getElementById("b4");
+        const b5 = document.getElementById("b5");
+        const b6 = document.getElementById("b6");        
+        const b7 = document.getElementById("b7");
+        const b8 = document.getElementById("b8");        
+
+        const RpyBox = document.getElementById("RpyBox");
+        const Rpytxt = document.getElementById("LeftRpy");
+
+        b1.textContent = "Product Information";
+        b2.textContent = "Order Status";
+        b3.textContent = "Payment Status";
+        b4.textContent = "Technical Support";
+        b5.textContent = "Returns & Exchanges";
+        b6.textContent = "Customer Services";
+        b7.textContent = "Business Hours";
+        b8.textContent = "Company Location";
+
         if(!box.style.display || box.style.display == "none"){   // Display Chat Box if the Chat Box haven display            
             
             box.style.display = 'block';
 
             // Dot Dot Show Message
             const mss = document.getElementById("Message");
-            const RealMss = document.getElementById("Last");
+            const RealMss = document.getElementById("Left");
+            const Selection = document.getElementById("Right");
+
             const messages = ["<P2>。</P2>", "<P2>。。</P2>", "<P2>。。。</P2>"];   // Define the dot messages to be displayed
 
             RealMss.style.display = 'none';
+            Selection.style.display = 'none';
 
             setTimeout(function () {
                 displayMessage(0);
@@ -206,22 +266,37 @@ export default function Debug(){
                 if (index < messages.length) {
                     mss.innerHTML = messages[index];
                     mss.style.display = 'block';
-            
+
                     setTimeout(function () {
                         mss.style.display = 'none';
                         displayMessage(index + 1);
                     }, 500);
-        
                 } else {
                     // After displaying all dot messages, set RealMss.style.display to 'block'
                     RealMss.style.display = 'block';
+
+                    setTimeout(function(){
+                        Selection.style.display = 'block';
+                    },1000);
                 }
             }
         } else {
             box.style.display = 'none'; // Close Chat Box if the Chat Box displayed
+
+            b1.style.display = 'block';
+            b2.style.display = 'block';
+            b3.style.display = 'block';
+            b4.style.display = 'block';
+            b5.style.display = 'block';
+            b6.style.display = 'block';
+            b7.style.display = 'block';
+            b8.style.display = 'block';
+
+            RpyBox.style.display = 'none';
+            Rpytxt.innerHTML = "";
         }
     };
-
+    
     // To Messenger Chat
     const ChatPage = () => {
         location.href = 'https://www.messenger.com/t/154811617722587/?messaging_source=source%3Apages%3Amessage_shortlink&source_id=1441792&recurring_notification=0';
@@ -251,12 +326,110 @@ export default function Debug(){
         return currentTime;
     };
 
-    // Close Mesage Box
-    const CloseMessage = () => {
-        const box = document.getElementById("ContainerBox");
-        box.style.display = 'none';
-    };
+    // Button function
+    const handleButtonClick = (value) => {
+        const RpyBox = document.getElementById("RpyBox");
+        const Rpytxt = document.getElementById("LeftRpy");
 
+        RpyBox.style.display = 'block';
+
+        if(value == 1){
+            b2.style.display = 'none';
+            b3.style.display = 'none';
+            b4.style.display = 'none';
+            b5.style.display = 'none';
+            b6.style.display = 'none';
+            b7.style.display = 'none';
+            b8.style.display = 'none';
+
+            Rpytxt.innerHTML = "Certainly! Click <a href='#' style='color: blue; text-decoration: underline;'>Here</a> to get the newest product information about our latest phone models, features, and pricing.";
+        } 
+        
+        if(value == 2){
+            b1.style.display = 'none';
+            b3.style.display = 'none';
+            b4.style.display = 'none';
+            b5.style.display = 'none';
+            b6.style.display = 'none';
+            b7.style.display = 'none';
+            b8.style.display = 'none';
+
+            Rpytxt.innerHTML = "Sure, I can help with that. Click <a href='#' style='color: blue; text-decoration: underline;'>Here</a> to get our customer services help and please provide your order number to the customer services.";
+        } 
+        
+        if(value == 3){
+            b1.style.display = 'none';
+            b2.style.display = 'none';
+            b4.style.display = 'none';
+            b5.style.display = 'none';
+            b6.style.display = 'none';
+            b7.style.display = 'none';
+            b8.style.display = 'none';
+
+            Rpytxt.innerHTML = "Of course! To assist you better, could you Click <a href='#' style='color: blue; text-decoration: underline;'>Here</a> and provide the order number or any relevant details regarding your payment? Our teams will look into it for you.";
+        } 
+        
+        if(value == 4){
+            b1.style.display = 'none';
+            b2.style.display = 'none';
+            b3.style.display = 'none';
+            b5.style.display = 'none';
+            b6.style.display = 'none';
+            b7.style.display = 'none';
+            b8.style.display = 'none';
+
+            Rpytxt.innerHTML = "Sorry, currently, this function has not been enabled. Please drop a message in our <a href='#' style='color: blue; text-decoration: underline;'>Messenger</a> and describe the problem you're experiencing with your phone. Our team will do their best to assist you.";
+        } 
+        
+        if(value == 5){
+            b1.style.display = 'none';
+            b2.style.display = 'none';
+            b3.style.display = 'none';
+            b4.style.display = 'none';
+            b6.style.display = 'none';
+            b7.style.display = 'none';
+            b8.style.display = 'none';
+
+            Rpytxt.innerHTML = "Thank you for reaching out. Currently, our product does not have a return and exchange policy. If you have any other questions or need further assistance, please feel free to contact our customer services through <a href='#' style='color: blue; text-decoration: underline;'>Messenger</a>. We are here to help and will do our best to provide the support you need. We appreciate your understanding!";
+        } 
+        
+        if(value == 6){
+            b1.style.display = 'none';
+            b2.style.display = 'none';
+            b3.style.display = 'none';
+            b4.style.display = 'none';
+            b5.style.display = 'none';
+            b7.style.display = 'none';
+            b8.style.display = 'none';
+
+            Rpytxt.innerHTML = "Apologies for any inconvenience. Currently, our customer services function is not available here. Kindly consider reaching out to us through <a href='#' style='color: blue; text-decoration: underline;'>Messenger</a> to get assistance. We appreciate your understanding and look forward to helping you there. Thank you!";
+        }
+
+        if(value == 7){
+            b1.style.display = 'none';
+            b2.style.display = 'none';
+            b3.style.display = 'none';
+            b4.style.display = 'none';
+            b5.style.display = 'none';
+            b6.style.display = 'none';
+            b8.style.display = 'none';
+
+            Rpytxt.innerHTML = "Our Business Hours are as follows:<br/><br/>Monday - Friday<br/>9 am - 8 pm<br/><br/>Saturday<br/>10 am - 5 pm<br/><br/>Sunday & Public Holidays<br/>Closed<br/><br/>For further assistance, feel free to reach out to us through <a href='#' style='color: blue; text-decoration: underline;'>Messenger</a>. Thank you for choosing us!";
+        }
+
+        if(value == 8){
+            b1.style.display = 'none';
+            b2.style.display = 'none';
+            b3.style.display = 'none';
+            b4.style.display = 'none';
+            b5.style.display = 'none';
+            b6.style.display = 'none';
+            b7.style.display = 'none';
+
+            Rpytxt.innerHTML = "Our company is located at:<br/><br/>Persiaran Multimedia, 63100 Cyberjaya, Selangor.<br/><br/>For any inquiries or assistance, please don't hesitate to contact us through <a href='#' style='color: blue; text-decoration: underline;'>Messenger</a>. We look forward to serving you!";
+        }
+    };
+    
     return (
         <div>
             <Main>
@@ -269,7 +442,7 @@ export default function Debug(){
                     <HeadContainer>
                         <H1>Customer Services</H1>
                         <P>Typically replies within a day</P>
-                        <CloseBtn onClick={CloseMessage}></CloseBtn>
+                        <CloseBtn onClick={ShowMessage}></CloseBtn>
                     </HeadContainer>
 
                     <TimeBox>
@@ -278,17 +451,33 @@ export default function Debug(){
 
                     <MessageBox>
                         <P2 id="Message"></P2>
-                        
-                        <div id="Last">
+                            
+                        <div id="Left">
                             <P2>Hi there <Span>👋</Span></P2>
                             <P2>How can I assist you ?</P2>
                         </div>
-                        
                     </MessageBox>
 
+                    <MessageBoxRight>
+                        <div id="Right">
+                            <Btn id="b1" onClick={() => handleButtonClick(1)}></Btn>
+                            <Btn id="b2" onClick={() => handleButtonClick(2)}></Btn>
+                            <Btn id="b3" onClick={() => handleButtonClick(3)}></Btn>
+                            <Btn id="b4" onClick={() => handleButtonClick(4)}></Btn>
+                            <Btn id="b5" onClick={() => handleButtonClick(5)}></Btn>
+                            <Btn id="b6" onClick={() => handleButtonClick(6)}></Btn>
+                            <Btn id="b7" onClick={() => handleButtonClick(7)}></Btn>
+                            <Btn id="b8" onClick={() => handleButtonClick(8)}></Btn>
+                        </div>
+                    </MessageBoxRight>
+
+                    <RpyBox id="RpyBox">                            
+                        <P2 id="LeftRpy"></P2>
+                    </RpyBox>
+                    
                     <BtnBox>
                         <ChatBtn onClick={ChatPage}>
-                            <P3>Start Chat</P3>
+                            <P3>Need Help</P3>
                         </ChatBtn>
                     </BtnBox>
                 </ContainerBox>
